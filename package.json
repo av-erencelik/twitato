@@ -22,6 +22,7 @@
     "next-auth": "^4.18.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-new-window": "^1.0.1",
     "typescript": "4.9.4"
   },
   "devDependencies": {
