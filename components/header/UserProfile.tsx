@@ -44,7 +44,7 @@ const UserProfile = () => {
           className="flex items-center gap-2 py-2 px-3 rounded-2xl hover:bg-gray-200 text-sm transition-all"
           onClick={() => setPopUp(true)}
         >
-          <FcGoogle className="text-base" /> Sign in with Google
+          <FcGoogle className="text-base" /> Sign in<span className="hidden md:block"> with Google</span>
         </button>
       )}
 
