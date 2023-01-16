@@ -12,9 +12,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`max-w-7xl mx-auto ${openSans.className} min-h-[100vh]`}>
         <Provider>
           <Header />
-          <div className="flex">
+          <div className="flex justify-between">
             <Sidebar />
             {children}
+            <Sidebar />
           </div>
           <MobileMenu />
         </Provider>
