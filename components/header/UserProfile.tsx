@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import { signOut, useSession, signIn } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import NewWindow from "react-new-window";
 const Loader = () => (
   <div className="my-flex">
@@ -21,10 +21,6 @@ const UserProfile = () => {
   function handleModal() {
     setModalOpen((prev) => !prev);
   }
-  function signInWithGoogle() {
-    signIn("google");
-  }
-
   useEffect(() => {
     if (session) {
       setPopUp(false);
@@ -53,13 +49,18 @@ const UserProfile = () => {
       )}
 
       {modalOpen && (
-        <div className="border-x border-b border-gray-200 absolute z-10 right-0 bg-white flex justify-end">
+        <motion.div
+          className="border-x border-b border-gray-200 absolute z-10 right-0 bg-white flex justify-end w-[75px] rounded-lg"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
           {session ? (
             <button className="flex items-center gap-2 p-3 text-sm" onClick={() => signOut()}>
               Log out
             </button>
           ) : null}
-        </div>
+        </motion.div>
       )}
       {popup && !session ? (
         <NewWindow
