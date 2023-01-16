@@ -18,3 +18,37 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.my-flex {
+  display: flex;
+  gap: 10px;
+}
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(0.25turn, transparent, #fff, transparent), linear-gradient(#eee, #eee),
+    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%), linear-gradient(#eee, #eee);
+  background-repeat: no-repeat;
+  animation: loading 1.5s infinite;
+}
+.lines {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  gap: 10px;
+  justify-content: center;
+}
+.line {
+  height: 10px;
+  width: 100%;
+  border-radius: 20px;
+  background: linear-gradient(0.25turn, transparent, #fff, transparent), linear-gradient(#eee, #eee),
+    radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%), linear-gradient(#eee, #eee);
+  background-repeat: no-repeat;
+  animation: loading 1.5s infinite;
+}
+@keyframes loading {
+  to {
+    background-position: 315px 0, 0 0, 0 190px, 50px 195px;
+  }
+}
