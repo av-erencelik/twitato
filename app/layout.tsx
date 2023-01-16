@@ -9,7 +9,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body className={`max-w-7xl mx-auto ${openSans.className}`}>
         <Header />
-        <Sidebar />
+        <div className="flex">
+          <Sidebar />
+        </div>
         {children}
       </body>
     </html>

@@ -1,5 +1,12 @@
+import Menu from "./Menu";
+
 const Sidebar = () => {
-  return <div className="p-5 border-x border-b border-gray-200"></div>;
+  return (
+    <div className="p-5 border-r border-gray-200 lg:w-72">
+      {" "}
+      <Menu />
+    </div>
+  );
 };
 
 export default Sidebar;
