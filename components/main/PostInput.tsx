@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { ChangeEvent, useState, FormEvent, useEffect } from "react";
+import { ChangeEvent, useState, FormEvent } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 import PostsSuspense from "../suspense/PostsSuspense";
@@ -35,13 +35,17 @@ const PostInput = () => {
       return;
     }
     console.log({
-      post: {
-        postText: text,
-        postImg: img ? img : "",
-        hashtag: hashtags ? hashtags[0] : "",
-      },
-      user: session?.user,
+      postText: text,
+      postImg: img ? img : "",
+      hashtag: hashtags ? hashtags[0] : "",
+      createdBy: session?.user,
+      likes: [],
     });
+    setText("");
+    setImg(undefined);
+    setHashtag(null);
+    const textInput = document.getElementById("textInput") as HTMLTextAreaElement;
+    textInput.value = "";
   }
   return (
     <>
@@ -82,6 +86,7 @@ const PostInput = () => {
                   style={{ resize: "none" }}
                   onChange={onTextInput}
                   maxLength={240}
+                  id="textInput"
                 />
               </div>
               <div className="flex justify-end mr-3">
