@@ -10,7 +10,7 @@ const MobileMenu = () => {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   return (
-    <div className="fixed left-0 bottom-0 sm:hidden flex justify-around w-full">
+    <div className="fixed left-0 bottom-0 sm:hidden flex justify-around w-full bg-white border-t border-gray-200">
       <Link
         href="/"
         className={`flex items-center gap-3 p-3 ${

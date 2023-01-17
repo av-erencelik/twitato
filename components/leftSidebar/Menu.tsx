@@ -10,7 +10,7 @@ const Menu = () => {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   return (
-    <div>
+    <div className="w-full">
       <Link
         href="/"
         className={`flex items-center gap-3 p-3 ${
@@ -18,7 +18,7 @@ const Menu = () => {
         }`}
       >
         <IoHomeOutline className="text-xl" />
-        <span className="hidden lg:block">Home</span>
+        <span className="hidden xl:block">Home</span>
       </Link>
       {session && (
         <>
@@ -29,7 +29,7 @@ const Menu = () => {
             }`}
           >
             <FiMessageSquare className="text-xl" />
-            <span className="hidden lg:block">Messages</span>
+            <span className="hidden xl:block">Messages</span>
           </Link>
           <Link
             href="/bookmarks"
@@ -38,7 +38,7 @@ const Menu = () => {
             }`}
           >
             <IoBookmarkOutline className="text-xl" />
-            <span className="hidden lg:block">Bookmarks</span>
+            <span className="hidden xl:block">Bookmarks</span>
           </Link>
           <Link
             href="/profile"
@@ -47,7 +47,7 @@ const Menu = () => {
             }`}
           >
             <BiUser className="text-xl" />
-            <span className="hidden lg:block">Profile</span>
+            <span className="hidden xl:block">Profile</span>
           </Link>
         </>
       )}
