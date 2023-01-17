@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChangeEvent, useState, FormEvent, useEffect } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
+import PostsSuspense from "../suspense/PostsSuspense";
 
 const PostInput = () => {
   const { data: session, status } = useSession();
@@ -12,6 +13,9 @@ const PostInput = () => {
   const [text, setText] = useState<string>("");
   const [hashtags, setHashtag] = useState<RegExpMatchArray | null>(null);
   const [error, setError] = useState("");
+  if (status === "loading") {
+    return <PostsSuspense />;
+  }
   function onImgUpload(e: ChangeEvent<HTMLInputElement>) {
     setImg(e.target.files![0]);
   }
