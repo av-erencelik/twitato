@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import { User } from "next-auth/core/types";
 import GoogleProvider from "next-auth/providers/google";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
+import { Timestamp } from "firebase/firestore";
 interface NewUser extends User {
   id: string;
 }
@@ -16,7 +17,7 @@ export const authOptions = {
           email: profile.email,
           image: profile.picture,
           name: profile.name,
-          date: new Date().toISOString(),
+          date: Timestamp.now(),
           id: profile.sub,
         };
       },
