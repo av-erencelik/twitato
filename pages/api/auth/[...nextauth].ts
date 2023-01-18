@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { Session, User } from "next-auth/core/types";
+import { User } from "next-auth/core/types";
 import GoogleProvider from "next-auth/providers/google";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 interface NewUser extends User {

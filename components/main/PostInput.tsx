@@ -6,9 +6,12 @@ import { ChangeEvent, useState, FormEvent } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 import PostsSuspense from "../suspense/PostsSuspense";
-
+import { v4 as uuidv4 } from "uuid";
+import writePost from "@/libs/writePost";
+import { storage } from "../firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 const PostInput = () => {
-  const { data: session, status } = useSession();
+  const { data: session, status }: { data: any; status: any } = useSession();
   const [img, setImg] = useState<undefined | File>(undefined);
   const [text, setText] = useState<string>("");
   const [hashtags, setHashtag] = useState<RegExpMatchArray | null>(null);
@@ -24,23 +27,39 @@ const PostInput = () => {
     setText(e.target.value.trim());
     setHashtag(e.target.value.trim().match(/#[\p{L}]+/giu));
   }
-  function onPostSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onPostSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (text.trim().length <= 0 && !img) {
       setError("You can't submit an empty post!");
       return;
     }
-    if (hashtags && hashtags.length >= 2) {
-      setError("You can't add more than one hashtag!");
+    if (hashtags && hashtags.length >= 3) {
+      setError("You can't add more than two hashtag!");
       return;
     }
-    console.log({
+    if (hashtags?.length != new Set(hashtags).size) {
+      setError("You can't add same hashtag for more than once");
+      return;
+    }
+
+    const post: Post = {
+      postId: uuidv4(),
       postText: text,
-      postImg: img ? img : "",
-      hashtag: hashtags ? hashtags[0] : "",
+      postImg: "",
+      hashtags: hashtags ? hashtags : [],
       createdBy: session?.user,
       likes: [],
-    });
+    };
+    const storageRef = ref(storage, post.postId);
+    if (img) {
+      await uploadBytesResumable(storageRef, img).then(() => {
+        getDownloadURL(storageRef).then(async (downloadUrl) => {
+          post.postImg = downloadUrl;
+        });
+      });
+    }
+    await writePost(post);
+
     setText("");
     setImg(undefined);
     setHashtag(null);
