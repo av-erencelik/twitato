@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 interface Post {
   postId: string;
   postText: string;
@@ -11,4 +13,5 @@ interface Post {
       }
     | undefined;
   likes: never[];
+  date: Timestamp;
 }

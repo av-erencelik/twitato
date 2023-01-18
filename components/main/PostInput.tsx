@@ -10,6 +10,9 @@ import { v4 as uuidv4 } from "uuid";
 import writePost from "@/libs/writePost";
 import { storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { Timestamp } from "firebase/firestore";
+import { Post } from "@/typing";
+
 const PostInput = () => {
   const { data: session, status }: { data: any; status: any } = useSession();
   const [img, setImg] = useState<undefined | File>(undefined);
@@ -37,7 +40,7 @@ const PostInput = () => {
       setError("You can't add more than two hashtag!");
       return;
     }
-    if (hashtags?.length != new Set(hashtags).size) {
+    if (hashtags && hashtags?.length != new Set(hashtags).size) {
       setError("You can't add same hashtag for more than once");
       return;
     }
@@ -49,6 +52,7 @@ const PostInput = () => {
       hashtags: hashtags ? hashtags : [],
       createdBy: session?.user,
       likes: [],
+      date: Timestamp.now(),
     };
     const storageRef = ref(storage, post.postId);
     if (img) {
