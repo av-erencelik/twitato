@@ -89,7 +89,7 @@ const PostsClientSide = ({ serverPosts }: { serverPosts: Post[] }) => {
     };
   }, [firstQueryDoc]);
   return (
-    <div className="flex flex-col gap-10 mt-10">
+    <div className="flex flex-col md:gap-10 gap-5 mt-10">
       {newPosts?.length > 0 ? (
         <button
           onClick={loadNewPosts}

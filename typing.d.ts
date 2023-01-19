@@ -14,4 +14,6 @@ export interface Post {
     | undefined;
   likes: never[];
   date: Timestamp;
+  commentsLength: number;
+  lastComment: { commentText: string; user: any; date: Timestamp } | "";
 }

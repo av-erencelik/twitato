@@ -53,6 +53,8 @@ const PostInput = () => {
       createdBy: session?.user,
       likes: [],
       date: Timestamp.now(),
+      commentsLength: 0,
+      lastComment: "",
     };
     const storageRef = ref(storage, post.postId);
     if (img) {
