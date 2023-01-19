@@ -130,7 +130,7 @@ const PostInput = () => {
 
             <div className="md:mt-4 md:mb-2 mt-2 mb-1 h-[1px] bg-gray-100" />
             <div className="flex gap-1 justify-between items-center">
-              <label htmlFor="img" className="cursor-pointer hover:bg-gray-200 p-2 rounded-full transition-all">
+              <label htmlFor="img" className="cursor-pointer hover:bg-gray-100 p-2 rounded-full transition-all">
                 <BiImageAdd className="text-2xl text-sky-600" />
               </label>
               <input

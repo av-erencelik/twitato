@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 
-interface Post {
+export interface Post {
   postId: string;
   postText: string;
   postImg: string;

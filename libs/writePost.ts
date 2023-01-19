@@ -1,12 +1,14 @@
+import { Post } from "@/typing";
 import { db } from "@/components/firebase";
 import { runTransaction, doc, increment, getDoc, setDoc, updateDoc } from "firebase/firestore";
-
 export default async function writePost(post: Post) {
   const postRef = doc(db, "posts", post.postId);
+  const commentsRef = doc(db, "comments", post.postId);
   try {
     await writeHashtags(post.hashtags);
     const status = await runTransaction(db, async (transaction) => {
       transaction.set(postRef, post);
+      transaction.set(commentsRef, { comments: [] });
     });
   } catch (e) {
     console.log(e);
