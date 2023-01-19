@@ -15,6 +15,8 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Post } from "@/typing";
+import PostIndividual from "./PostIndividual";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 
 const PostsClientSide = ({ serverPosts }: { serverPosts: Post[] }) => {
   const [posts, setPosts] = useState(serverPosts);
@@ -87,11 +89,25 @@ const PostsClientSide = ({ serverPosts }: { serverPosts: Post[] }) => {
     };
   }, [firstQueryDoc]);
   return (
-    <div>
+    <div className="flex flex-col gap-10 mt-10">
       {newPosts?.length > 0 ? <button onClick={loadNewPosts}>Load New {newPosts?.length}</button> : null}
-      {posts.map((post) => (
-        <div key={post.postId}>{post.postText}</div>
-      ))}
+      <AnimateSharedLayout>
+        <AnimatePresence>
+          {posts.map((post) => (
+            <motion.div
+              key={post.postId}
+              layout
+              initial="pre"
+              animate="visible"
+              variants={{ pre: { opacity: 0 }, visible: { opacity: 1 } }}
+              transition={{ duration: 0.5 }}
+            >
+              <PostIndividual post={post}></PostIndividual>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </AnimateSharedLayout>
+
       <button onClick={() => setLoadMore((prev) => !prev)}>Load More</button>
     </div>
   );

@@ -1,7 +1,6 @@
 import { db } from "@/components/firebase";
 import { Post } from "@/typing";
 import { collection, getDocs, limit, onSnapshot, orderBy, query } from "firebase/firestore";
-import moment from "moment";
 import PostsClientSide from "./PostsClientSide";
 
 async function getPosts() {

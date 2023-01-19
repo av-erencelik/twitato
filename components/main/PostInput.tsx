@@ -59,10 +59,12 @@ const PostInput = () => {
       await uploadBytesResumable(storageRef, img).then(() => {
         getDownloadURL(storageRef).then(async (downloadUrl) => {
           post.postImg = downloadUrl;
+          await writePost(post);
         });
       });
+    } else {
+      await writePost(post);
     }
-    await writePost(post);
 
     setText("");
     setImg(undefined);
@@ -73,7 +75,7 @@ const PostInput = () => {
   return (
     <>
       {session && (
-        <div className="w-full bg-white rounded-2xl md:p-5 p-2">
+        <div className="w-full bg-white rounded-2xl md:p-5 md:pb-2 p-2">
           <form onSubmit={onPostSubmit}>
             <div className="flex justify-center gap-2 mb-2">
               {hashtags &&
