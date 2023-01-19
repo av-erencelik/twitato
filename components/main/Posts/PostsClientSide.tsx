@@ -90,7 +90,14 @@ const PostsClientSide = ({ serverPosts }: { serverPosts: Post[] }) => {
   }, [firstQueryDoc]);
   return (
     <div className="flex flex-col gap-10 mt-10">
-      {newPosts?.length > 0 ? <button onClick={loadNewPosts}>Load New {newPosts?.length}</button> : null}
+      {newPosts?.length > 0 ? (
+        <button
+          onClick={loadNewPosts}
+          className="px-4 py-2 m-auto text-sky-600 rounded-md hover:bg-white font-semibold transition-all"
+        >
+          {newPosts?.length} New Post
+        </button>
+      ) : null}
       <AnimateSharedLayout>
         <AnimatePresence>
           {posts.map((post) => (
@@ -108,7 +115,12 @@ const PostsClientSide = ({ serverPosts }: { serverPosts: Post[] }) => {
         </AnimatePresence>
       </AnimateSharedLayout>
 
-      <button onClick={() => setLoadMore((prev) => !prev)}>Load More</button>
+      <button
+        onClick={() => setLoadMore((prev) => !prev)}
+        className="px-4 py-2 m-auto text-sky-600 rounded-md hover:bg-white font-semibold transition-all"
+      >
+        Load More
+      </button>
     </div>
   );
 };

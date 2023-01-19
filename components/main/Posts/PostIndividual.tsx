@@ -9,6 +9,16 @@ import { FaRegComment } from "react-icons/fa";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
 const PostIndividual = ({ post }: { post: Post }) => {
+  const coloredWords = post.postText.split(" ").map((word, index) => {
+    if (word[0] === "#") {
+      return (
+        <span className="text-sky-600" key={index}>
+          {word}{" "}
+        </span>
+      );
+    }
+    return word + " ";
+  });
   return (
     <div className="bg-white rounded-2xl p-5 pb-2">
       <div className="flex gap-2 items-center">
@@ -19,7 +29,7 @@ const PostIndividual = ({ post }: { post: Post }) => {
         </div>
       </div>
       <div className="mt-5 text-sm font-normal">
-        <p>{post.postText}</p>
+        <p>{coloredWords}</p>
       </div>
       {post.postImg && (
         <div className="w-full flex justify-center mt-5 relative h-[300px] overflow-hidden">
