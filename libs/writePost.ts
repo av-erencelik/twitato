@@ -29,7 +29,7 @@ export async function writeHashtags(hashtags: [] | RegExpMatchArray) {
     const hashtagRef = doc(db, "trends", hashtag);
     const hashtagDoc = await getDoc(hashtagRef);
     if (!hashtagDoc.exists()) {
-      await setDoc(hashtagRef, { number: 1 });
+      await setDoc(hashtagRef, { number: 1, hashtag: hashtag });
     } else {
       await updateDoc(hashtagRef, { number: increment(1) });
     }
