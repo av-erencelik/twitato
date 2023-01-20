@@ -55,6 +55,7 @@ const PostInput = () => {
       date: Timestamp.now(),
       commentsLength: 0,
       lastComment: "",
+      bookmarkedBy: [],
     };
     const storageRef = ref(storage, post.postId);
     if (img) {

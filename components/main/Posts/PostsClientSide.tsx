@@ -18,8 +18,8 @@ import { Post } from "@/typing";
 import PostIndividual from "./PostIndividual";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 
-const PostsClientSide = ({ serverPosts }: { serverPosts: Post[] }) => {
-  const [posts, setPosts] = useState(serverPosts);
+const PostsClientSide = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loadMore, setLoadMore] = useState(false);
   const [lastQueryDoc, setLastQueryDoc] = useState<null | QueryDocumentSnapshot<DocumentData>>(null);
   const [firstQueryDoc, setFirstQueryDoc] = useState<null | QueryDocumentSnapshot<DocumentData>>(null);

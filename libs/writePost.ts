@@ -86,3 +86,23 @@ export async function handleCommentWrite(
     console.log(e);
   }
 }
+export async function handleBookmarkWrite(postId: string, userId: string, type: string) {
+  const postRef = doc(db, "posts", postId);
+  if (type === "add") {
+    try {
+      await updateDoc(postRef, {
+        bookmarkedBy: arrayUnion(userId),
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    try {
+      await updateDoc(postRef, {
+        bookmarkedBy: arrayRemove(userId),
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
