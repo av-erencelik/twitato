@@ -4,6 +4,7 @@ import { Open_Sans } from "@next/font/google";
 import Sidebar from "@/components/leftSidebar/Sidebar";
 import Provider from "@/components/Provider";
 import MobileMenu from "@/components/mobile/MobileMenu";
+import SidebarRight from "@/components/rightSidebar/SidebarRight";
 const openSans = Open_Sans({ subsets: ["latin"] });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex justify-between">
             <Sidebar />
             {children}
-            <Sidebar />
+            <SidebarRight />
           </div>
           <MobileMenu />
         </Provider>
