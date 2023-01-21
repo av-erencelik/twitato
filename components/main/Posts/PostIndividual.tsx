@@ -10,13 +10,13 @@ import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
 import { useSession } from "next-auth/react";
-import { useEffect, useState, ChangeEvent, FormEvent } from "react";
+import { useEffect, useState, ChangeEvent, FormEvent, Dispatch, SetStateAction } from "react";
 import { handleBookmarkWrite, handleCommentWrite, handleDislikeWrite, handleLikeWrite } from "@/libs/writePost";
 import { Timestamp } from "firebase/firestore";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const PostIndividual = ({ post }: { post: Post }) => {
+const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal: Dispatch<SetStateAction<boolean>> }) => {
   const { data: session, status }: { data: any; status: any } = useSession();
   const [likedByUser, setLikedByUser] = useState<boolean>(false);
   const [comment, setComment] = useState("");
@@ -37,6 +37,10 @@ const PostIndividual = ({ post }: { post: Post }) => {
     setComment(e.target.value.trim());
   }
   function handleLike() {
+    if (!session) {
+      setShowModal(true);
+      return;
+    }
     if (!likedByUser) {
       handleLikeWrite(post.postId, session.user, post.createdBy);
     } else {
@@ -66,6 +70,10 @@ const PostIndividual = ({ post }: { post: Post }) => {
     ]);
   }
   function handleBookmarking() {
+    if (!session) {
+      setShowModal(true);
+      return;
+    }
     if (bookmarkedByUser) {
       handleBookmarkWrite(post.postId, session.user.id, "delete");
       setBookmarkedByUser((prev) => !prev);
@@ -155,29 +163,43 @@ const PostIndividual = ({ post }: { post: Post }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex gap-2 items-center">
-            <Image src={session.user.image as string} alt="createdBy" width={40} height={40} className="rounded-full" />
-            <form className=" flex-1 flex items-center relative" onSubmit={handleComment}>
-              <textarea
-                className="rounded-2xl w-full p-3 outline-none text-xs bg-gray-100 pl-5 pr-10 border-2 border-gray-200 focus:border-sky-600"
-                placeholder="What's on your mind?"
-                cols={10}
-                rows={1}
-                style={{ resize: "none" }}
-                maxLength={240}
-                onChange={onCommentInput}
-                id="comment"
-              />
-              <button type="submit" className="absolute right-0 text-xl hover:bg-white transition-all p-3 text-sky-600">
-                <IoMdSend className="text-xl" />
-              </button>
-            </form>
-          </div>
-          <div className="flex justify-end mr-3">
-            <p className={`text-[0.7rem] ${comment.length >= 240 ? "text-red-700" : "text-sky-600"}`}>
-              {comment.length}/240
-            </p>
-          </div>
+          {session && (
+            <>
+              <div className="flex gap-2 items-center">
+                <Image
+                  src={session.user.image as string}
+                  alt="createdBy"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <form className=" flex-1 flex items-center relative" onSubmit={handleComment}>
+                  <textarea
+                    className="rounded-2xl w-full p-3 outline-none text-xs bg-gray-100 pl-5 pr-10 border-2 border-gray-200 focus:border-sky-600"
+                    placeholder="What's on your mind?"
+                    cols={10}
+                    rows={1}
+                    style={{ resize: "none" }}
+                    maxLength={240}
+                    onChange={onCommentInput}
+                    id="comment"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-0 text-xl hover:bg-white transition-all p-3 text-sky-600"
+                  >
+                    <IoMdSend className="text-xl" />
+                  </button>
+                </form>
+              </div>
+              <div className="flex justify-end mr-3">
+                <p className={`text-[0.7rem] ${comment.length >= 240 ? "text-red-700" : "text-sky-600"}`}>
+                  {comment.length}/240
+                </p>
+              </div>
+            </>
+          )}
+
           {newUserComments.length > 0 && (
             <div>
               {newUserComments.map((comment, index) => {

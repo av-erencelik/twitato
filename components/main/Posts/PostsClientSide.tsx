@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { Post } from "@/typing";
 import PostIndividual from "./PostIndividual";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import Modal from "@/components/modal/Modal";
 
 const PostsClientSide = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -24,6 +25,7 @@ const PostsClientSide = () => {
   const [lastQueryDoc, setLastQueryDoc] = useState<null | QueryDocumentSnapshot<DocumentData>>(null);
   const [firstQueryDoc, setFirstQueryDoc] = useState<null | QueryDocumentSnapshot<DocumentData>>(null);
   const [newPosts, setNewPosts] = useState<Post[]>([]);
+  const [showModal, setShowModal] = useState(false);
   async function getPostsOnLoad() {
     const postsRef = collection(db, "posts");
     const q = query(postsRef, orderBy("date", "desc"), limit(5));
@@ -109,7 +111,7 @@ const PostsClientSide = () => {
               variants={{ pre: { opacity: 0 }, visible: { opacity: 1 } }}
               transition={{ duration: 0.5 }}
             >
-              <PostIndividual post={post}></PostIndividual>
+              <PostIndividual post={post} setShowModal={setShowModal}></PostIndividual>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -121,6 +123,7 @@ const PostsClientSide = () => {
       >
         Load More
       </button>
+      {showModal && <Modal setOpenModal={setShowModal} />}
     </div>
   );
 };
