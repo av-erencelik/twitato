@@ -16,7 +16,7 @@ import { Timestamp } from "firebase/firestore";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal: Dispatch<SetStateAction<boolean>> }) => {
+const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal?: Dispatch<SetStateAction<boolean>> }) => {
   const { data: session, status }: { data: any; status: any } = useSession();
   const [likedByUser, setLikedByUser] = useState<boolean>(false);
   const [comment, setComment] = useState("");
@@ -38,7 +38,7 @@ const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal: Disp
   }
   function handleLike() {
     if (!session) {
-      setShowModal(true);
+      setShowModal!(true);
       return;
     }
     if (!likedByUser) {
@@ -71,7 +71,7 @@ const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal: Disp
   }
   function handleBookmarking() {
     if (!session) {
-      setShowModal(true);
+      setShowModal!(true);
       return;
     }
     if (bookmarkedByUser) {
