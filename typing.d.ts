@@ -10,6 +10,7 @@ export interface Post {
         name?: string | null | undefined;
         email?: string | null | undefined;
         image?: string | null | undefined;
+        id?: string | null | undefined;
       }
     | undefined;
   likes: never[];

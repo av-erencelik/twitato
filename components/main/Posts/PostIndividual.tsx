@@ -108,7 +108,10 @@ const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal?: Dis
             className="rounded-full"
           />
           <div>
-            <h3 className="font-semibold text-sm">{post.createdBy?.name}</h3>
+            <Link href={`/profile/${post.createdBy!.id}`}>
+              <h3 className="font-semibold text-sm underline-offset-1 hover:underline">{post.createdBy?.name}</h3>
+            </Link>
+
             <h6 className="text-[0.70rem]">{moment(post.date).fromNow()}</h6>
           </div>
         </div>
