@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { IoHomeOutline, IoBookmarkOutline } from "react-icons/io5";
-import { FiMessageSquare } from "react-icons/fi";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { BiUser } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -23,13 +23,13 @@ const Menu = () => {
       {session && (
         <>
           <Link
-            href="/messages"
+            href="/notifications"
             className={`flex items-center gap-3 p-3 ${
-              pathname == "/messages" ? "bg-gray-100 rounded-md text-sky-600 font-semibold" : ""
+              pathname == "/notifications" ? "bg-gray-100 rounded-md text-sky-600 font-semibold" : ""
             }`}
           >
-            <FiMessageSquare className="text-xl" />
-            <span className="hidden xl:block">Messages</span>
+            <IoMdNotificationsOutline className="text-xl" />
+            <span className="hidden xl:block">Notifications</span>
           </Link>
           <Link
             href="/bookmarks"

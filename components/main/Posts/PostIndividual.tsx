@@ -26,9 +26,13 @@ const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal?: Dis
   const coloredWords = post.postText.split(" ").map((word, index) => {
     if (word[0] === "#") {
       return (
-        <span className="text-sky-600" key={index}>
+        <Link
+          href={`/trends/${word}`}
+          className="text-sm font-bold text-sky-600 hover:underline underline-offset-2"
+          key={index}
+        >
           {word}{" "}
-        </span>
+        </Link>
       );
     }
     return word + " ";
