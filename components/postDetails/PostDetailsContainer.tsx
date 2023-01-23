@@ -9,7 +9,6 @@ const PostDetailsContainer = ({ postId }: { postId: { params: { postId: string }
   const [showModal, setShowModal] = useState(false);
   const [post, setPost] = useState<Post | null>(null);
   async function getPost() {
-    console.log(postId);
     const postsRef = doc(db, "posts", postId.params.postId);
     const docSnapshot = await getDoc(postsRef);
     setPost(docSnapshot.data() as Post);

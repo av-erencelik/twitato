@@ -4,7 +4,7 @@ const Trend = ({ trend }: { trend: { number: number; hashtag: string } }) => {
   return (
     <div className="">
       <Link
-        href={`/trends/${trend.hashtag}`}
+        href={`/trends/${trend.hashtag.substring(1)}`}
         className="text-sm font-bold text-sky-600 hover:underline underline-offset-2"
       >
         {trend.hashtag}
