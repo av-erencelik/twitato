@@ -98,7 +98,7 @@ const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal?: Dis
   }, [session]);
   return (
     <div className="bg-white rounded-2xl p-5 pb-2 hover:bg-gray-200 transition-all cursor-pointer">
-      <Link href={`/posts/${post.postId}`}>
+      <Link href={`/post/${post.postId}`}>
         <div className="flex gap-2 items-center">
           <Image
             src={post.createdBy?.image as string}
