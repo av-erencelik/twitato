@@ -21,7 +21,7 @@ const MainNotifications = async () => {
     <div className="bg-gray-100 rounded-md p-4 flex flex-col gap-0">
       <h3 className="text-center text-sky-600 font-bold">Notifications</h3>
       <div className="h-[1px] mt-1 bg-sky-600" />
-      {notificationData!.notifications.map((notification: any, index: number) => {
+      {notificationData!.notifications.reverse().map((notification: any, index: number) => {
         return <MainNotification key={index as any} notification={notification} />;
       })}
     </div>

@@ -17,12 +17,16 @@ const Notifications = async () => {
     return <div></div>;
   }
   const notificationData = await getNotifications(session.user.id);
-  const recentNotificationData = [
-    notificationData!.notifications[notificationData!.notifications.length - 1],
-    notificationData!.notifications[notificationData!.notifications.length - 2],
-    notificationData!.notifications[notificationData!.notifications.length - 3],
-    notificationData!.notifications[notificationData!.notifications.length - 4],
-  ];
+  let recentNotificationData = [];
+  if (notificationData!.notifications.length >= 4) {
+    recentNotificationData.push(notificationData!.notifications[notificationData!.notifications.length - 1]);
+    recentNotificationData.push(notificationData!.notifications[notificationData!.notifications.length - 2]);
+    recentNotificationData.push(notificationData!.notifications[notificationData!.notifications.length - 3]);
+    recentNotificationData.push(notificationData!.notifications[notificationData!.notifications.length - 4]);
+  } else {
+    recentNotificationData = notificationData!.notifications.reverse();
+  }
+
   return (
     <div className="bg-gray-100 rounded-md p-4 flex flex-col gap-0">
       <h3 className="text-center text-sky-600">My Activity</h3>
@@ -30,6 +34,7 @@ const Notifications = async () => {
       {recentNotificationData!.map((notification: any, index: number) => {
         return <Notification key={index as any} notification={notification} />;
       })}
+      {notificationData!.notifications.length == 0 && <p className="text-center">No activity</p>}
     </div>
   );
 };
