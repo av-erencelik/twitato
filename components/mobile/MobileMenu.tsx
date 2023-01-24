@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const MobileMenu = () => {
-  const { data: session, status } = useSession();
+  const { data: session, status }: { data: any; status: any } = useSession();
   const pathname = usePathname();
   return (
     <div className="fixed left-0 bottom-0 sm:hidden flex justify-around w-full bg-white border-t border-gray-200">
@@ -22,9 +22,9 @@ const MobileMenu = () => {
       {session && (
         <>
           <Link
-            href="/messages"
+            href="/notifications"
             className={`flex items-center gap-3 p-3 ${
-              pathname == "/messages" ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
+              pathname == "/notifications" ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
             }`}
           >
             <FiMessageSquare className="text-xl" />
@@ -38,9 +38,9 @@ const MobileMenu = () => {
             <IoBookmarkOutline className="text-xl" />
           </Link>
           <Link
-            href="/profile"
+            href={`/profile/${session.user.id}`}
             className={`flex items-center gap-3 p-3 ${
-              pathname == "/profile" ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
+              pathname == `/profile/${session.user.id}` ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
             }`}
           >
             <BiUser className="text-xl" />
