@@ -1,4 +1,5 @@
 import ProfileContainer from "@/components/profile/ProfileContainer";
+
 export const dynamic = "force-dynamic";
 const page = (userId: any) => {
   return (
