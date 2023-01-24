@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 const ProfileContainer = (userId: any) => {
   const [userData, setUserData] = useState<any>(null);
   async function getProfileInfos() {
-    const userRef = doc(db, "users", userId.params.userId);
+    const userRef = doc(db, "users", userId.userId.params.userId);
     const userDoc = await getDoc(userRef);
     const user = userDoc.data();
     setUserData(user);
