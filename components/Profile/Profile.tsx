@@ -5,6 +5,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BsCalendar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
+import EditModal from "../modal/EditModal";
 
 const Profile = async ({
   user,
@@ -22,11 +23,7 @@ const Profile = async ({
       </div>
       <div className="px-10 flex justify-between  items-end">
         <Image src={user.image} alt="user pp" width={150} height={150} className="mt-[-100px] rounded-full" />
-        {session.user.id === user.userId ? (
-          <button className="border rounded-full py-2 px-3 hover:text-sky-600">Edit profile</button>
-        ) : (
-          <button className="border rounded-full py-2 px-3 hover:text-sky-600">Message</button>
-        )}
+        {session.user.id === user.userId ? <EditModal /> : null}
       </div>
       <div className="px-10">
         <h3 className="font-bold text-xl">{user.name}</h3>

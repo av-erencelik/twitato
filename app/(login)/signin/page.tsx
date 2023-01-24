@@ -13,7 +13,7 @@ const SignIn = () => {
     }
   }, [session, status]);
 
-  return <div>signIn</div>;
+  return <div></div>;
 };
 
 export default SignIn;
