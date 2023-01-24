@@ -1,4 +1,4 @@
-import ProfileContainer from "@/components/profile/ProfileContainer";
+import ProfileContainer from "@/components/Profile/ProfileContainer";
 
 export const dynamic = "force-dynamic";
 const page = (userId: any) => {
