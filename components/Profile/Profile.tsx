@@ -1,21 +1,20 @@
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+"use client";
+
 import moment from "moment";
-import { unstable_getServerSession } from "next-auth";
+
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+
 import { BsCalendar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import EditModal from "../modal/EditModal";
 
-const Profile = async ({
+const Profile = ({
   user,
 }: {
   user: { date: string; email: string; emailVerified: null; image: string; name: string; userId: string } | any;
 }) => {
-  const session = await unstable_getServerSession(authOptions);
-  if (!session) {
-    notFound();
-  }
+  const { data: session, status }: { data: any; status: string } = useSession();
   return (
     <div className="flex flex-col gap-4 bg-white">
       <div className="h-[250px] w-full bg-gray-200 flex flex-col gap-4">

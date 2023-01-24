@@ -27,7 +27,7 @@ const PostIndividual = ({ post, setShowModal }: { post: Post; setShowModal?: Dis
     if (word[0] === "#") {
       return (
         <Link
-          href={`/trends/${word}`}
+          href={`/trends/${word.substring(1)}`}
           className="text-sm font-bold text-sky-600 hover:underline underline-offset-2"
           key={index}
         >
