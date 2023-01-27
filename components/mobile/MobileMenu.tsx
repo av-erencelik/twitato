@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { IoHomeOutline, IoBookmarkOutline } from "react-icons/io5";
-import { FiMessageSquare } from "react-icons/fi";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { BiUser } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -13,9 +13,7 @@ const MobileMenu = () => {
     <div className="fixed left-0 bottom-0 sm:hidden flex justify-around w-full bg-white border-t border-gray-200">
       <Link
         href="/"
-        className={`flex items-center gap-3 p-3 ${
-          pathname == "/" ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
-        }`}
+        className={`flex items-center gap-3 p-3 ${pathname == "/" ? " rounded-full text-sky-600 font-semibold" : ""}`}
       >
         <IoHomeOutline className="text-xl" />
       </Link>
@@ -24,15 +22,15 @@ const MobileMenu = () => {
           <Link
             href="/notifications"
             className={`flex items-center gap-3 p-3 ${
-              pathname == "/notifications" ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
+              pathname == "/notifications" ? " rounded-full text-sky-600 font-semibold" : ""
             }`}
           >
-            <FiMessageSquare className="text-xl" />
+            <IoMdNotificationsOutline className="text-xl" />
           </Link>
           <Link
             href="/bookmarks"
             className={`flex items-center gap-3 p-3 ${
-              pathname == "/bookmarks" ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
+              pathname == "/bookmarks" ? "rounded-full text-sky-600 font-semibold" : ""
             }`}
           >
             <IoBookmarkOutline className="text-xl" />
@@ -40,7 +38,7 @@ const MobileMenu = () => {
           <Link
             href={`/profile/${session.user.id}`}
             className={`flex items-center gap-3 p-3 ${
-              pathname == `/profile/${session.user.id}` ? "bg-gray-100 rounded-full text-sky-600 font-semibold" : ""
+              pathname == `/profile/${session.user.id}` ? " rounded-full text-sky-600 font-semibold scale-110" : ""
             }`}
           >
             <BiUser className="text-xl" />
