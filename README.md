@@ -45,6 +45,6 @@ You can see a live demo of this project [here](https://twitato.vercel.app/).
 
 ## Screenshots
 
-![Screenshot of Twitato homepage](https://i.postimg.cc/k412ytwZ/Screenshot-43.png)
-![Screenshot of Twitato profile page](https://i.postimg.cc/7hJZMt5G/Screenshot-44.png)
+![Screenshot of Twitato homepage](https://i.postimg.cc/KzMYtskK/Screenshot-43.png)
+![Screenshot of Twitato profile page](https://i.postimg.cc/j2htXVsj/Screenshot-44.png)
 
